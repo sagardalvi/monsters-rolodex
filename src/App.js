@@ -5,15 +5,17 @@ import {SearchBox} from "./components/search-box/search-box.component";
 
 class App extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.state = {
       monsters: [
         {id: 1, name: 'Frankenstein'},
         {id: 2, name: 'Dracula'},
         {id: 3, name: 'Zombie'},
       ],
-      searchField: ''
+      searchField: '',
+      title: 'Monsters Rolodex'
     }
   }
 
@@ -23,18 +25,19 @@ class App extends Component {
       .then(users => this.setState({monsters: users}))
   }
 
-  handleChange = e => {
-    this.setState({searchField: e.target.value});
+  handleChange = event => {
+    this.setState({searchField: event.target.value});
   }
 
   render() {
-    const {monsters, searchField} = this.state; //Destructuring
+    const {monsters, searchField, title} = this.state; //Destructuring
     const filteredMonsters = monsters.filter(monster => monster.name.toLowerCase().includes(searchField.toLowerCase()));
     return (
       <div className="App">
-        <h1>Monsters Rolodex</h1>
+        <h1>{title}</h1>
         <SearchBox placeholder={'Search Monsters'}
                    handleChange={this.handleChange}/>
+        <p className={'search-tag'}>Filter by Name: <i>{searchField}</i></p>
         <CardList monsters={filteredMonsters}/>
       </div>
     );

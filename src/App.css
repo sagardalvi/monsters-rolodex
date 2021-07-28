@@ -8,6 +8,24 @@ h1 {
   color: #0ccac4;
 }
 
+p.search-tag {
+  color: yellowgreen;
+}
+
+.lifecycles {
+  margin-top: 20px;
+}
+
+button {
+  margin: 10px;
+  background-color: white;
+  color: black;
+  width: 140px;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
