@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import SessionApp from "./session/session-app.component";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <SessionApp />
   </React.StrictMode>,
   document.getElementById('root')
 );
