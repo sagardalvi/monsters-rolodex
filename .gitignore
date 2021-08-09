@@ -6,6 +6,8 @@
 /.idea
 .idea
 .pnp.js
+*.css
+*.css.map
 
 # testing
 /coverage
