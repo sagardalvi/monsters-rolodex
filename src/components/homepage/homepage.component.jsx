@@ -2,6 +2,8 @@ import {Component} from "react";
 import {CardList} from "../card-list/card-list.component";
 import {SearchBox} from "../search-box/search-box.component";
 import './homepage.style.css';
+import {connect} from 'react-redux';
+import {addUsersList} from '../../redux/user/user.action';
 
 class Homepage extends Component {
 
@@ -9,20 +11,16 @@ class Homepage extends Component {
     super(props);
 
     this.state = {
-      monsters: [
-        {id: 1, name: 'Frankenstein'},
-        {id: 2, name: 'Dracula'},
-        {id: 3, name: 'Zombie'},
-      ],
       searchField: '',
       title: 'Monsters Rolodex'
     }
   }
 
   componentDidMount() {
+    const {addMonsters} = this.props;
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(response => response.json())
-      .then(users => this.setState({monsters: users}))
+      .then(users => addMonsters(users))
   }
 
   handleChange = event => {
@@ -30,7 +28,8 @@ class Homepage extends Component {
   }
 
   render() {
-    const {monsters, searchField, title} = this.state; //Destructuring
+    const {searchField, title} = this.state; //Destructuring
+    const {monsters} = this.props
     const filteredMonsters = monsters.filter(monster => monster.name.toLowerCase().includes(searchField.toLowerCase()));
     return (
       <div >
@@ -44,4 +43,12 @@ class Homepage extends Component {
   }
 }
 
-export default Homepage;
+const mapStateToProps = ({user}) => ({
+  monsters: user.monsters
+});
+
+const mapDispatchToProps = dispatch => ({
+  addMonsters: monsters => dispatch(addUsersList(monsters))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Homepage);
