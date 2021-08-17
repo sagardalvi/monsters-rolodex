@@ -57,3 +57,12 @@ button {
     transform: rotate(360deg);
   }
 }
+
+a {
+  text-decoration: none;
+  color: aliceblue;
+}
+
+* {
+  box-sizing: border-box;
+}

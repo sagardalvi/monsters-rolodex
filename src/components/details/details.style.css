@@ -1,0 +1,42 @@
+.details-container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: stretch;
+}
+
+.details-container .info {
+    padding-left: 20px;
+}
+
+.details-container .info .option {
+    display: flex;
+}
+
+.details-container label{
+    color: #95dada;
+    font-size: 50px;
+    font-family: 'Bigelow Rules', serif;
+    font-weight: 600;
+
+}
+
+.details-container span {
+    font-size: 20px;
+    color: blanchedalmond;
+    padding: 20px;
+    font-family: sans-serif;
+}
+
+.details-container .profile-pic {
+    background-color: #95dada;
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 25px;
+    width: 300px;
+}
+
+.back-navigation {
+    display: block;
+    padding: 40px;
+}

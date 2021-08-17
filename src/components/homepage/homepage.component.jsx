@@ -1,7 +1,7 @@
 import {Component} from "react";
 import {CardList} from "../card-list/card-list.component";
 import {SearchBox} from "../search-box/search-box.component";
-import './homepage.styles.scss';
+import './homepage.style.css';
 
 class Homepage extends Component {
 
