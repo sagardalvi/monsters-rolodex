@@ -42,7 +42,7 @@ class Details extends React.Component {
 
           <div className='profile-pic'>
             <img alt='monster'
-                 src={`https://robohash.org/${monster.id}?set=set2&size=240x240`}/>
+                 src={`https://robohash.org/${monster.id}?set=set2&size=290x290`}/>
             <h2 key={monster.id}>{monster.name}</h2>
           </div>
           <div className='info'>
@@ -65,10 +65,9 @@ class Details extends React.Component {
             <div className='option'>
               <label>Address</label>
               <span>
-                {monster.address.street} <br/>
-                {monster.address.suite}<br/>
-                {monster.address.city}<br/>
-                {monster.address.zipcode}
+                {monster.address.street},<br/>
+                {monster.address.suite},<br/>
+                {monster.address.city}({monster.address.zipcode})
               </span>
             </div>
           </div>

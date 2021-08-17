@@ -24,8 +24,9 @@
 .details-container span {
     font-size: 20px;
     color: blanchedalmond;
-    padding: 20px;
-    font-family: sans-serif;
+    padding: 15px;
+    font-family: cursive;
+    text-align: left;
 }
 
 .details-container .profile-pic {
@@ -33,7 +34,6 @@
     border: 1px solid grey;
     border-radius: 5px;
     padding: 25px;
-    width: 300px;
 }
 
 .back-navigation {
