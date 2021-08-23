@@ -1,46 +1,32 @@
 import React from 'react';
-import './details.style.css';
+import './add-monster.style.css';
 import CustomButton from '../custom-button/custom-button.component';
+import {generateNewMonster} from '../../redux/user/user.util';
+import {addUser} from '../../redux/user/user.action';
+import {connect} from 'react-redux';
 
-class Details extends React.Component {
+class AddMonster extends React.Component {
   constructor(props) {
     super(props);
-    this.monsterId = props.match.params.monsterId
     this.state = {
-      monster: {
-        id: this.monsterId,
-        name: null,
-        email: null,
-        address: {
-          street: null,
-          suite: null,
-          city: null,
-          zipcode: null
-        },
-        phone: "1-770-736-8031 x56442",
-        website: "hildegard.org",
-        company: {
-          name: "Romaguera-Crona",
-          bs: "harness real-time e-markets"
-        }
-      }
+      monster: generateNewMonster()
     }
   }
 
-  componentDidMount() {
-    fetch(`https://jsonplaceholder.typicode.com/users/${this.monsterId}`)
-      .then(response => response.json())
-      .then(user => this.setState({monster: user}))
+  generateNew = () => {
+    this.setState({
+      monster: generateNewMonster()
+    })
   }
+
 
   render() {
     const {monster} = this.state;
-    const {history} = this.props;
+    const {addMonster, history} = this.props;
     return (
       <div className='details-page'>
-        <h1>Monster</h1>
+        <h1>New Monster</h1>
         <div className='details-container'>
-
           <div className='profile-pic'>
             <img alt='monster'
                  src={`https://robohash.org/${monster.id}?set=set2&size=290x290`}/>
@@ -74,11 +60,20 @@ class Details extends React.Component {
           </div>
         </div>
 
-        <CustomButton onClick={()=>history.push('/')}>Back</CustomButton>
+        <div className='button-container'>
+          <CustomButton onClick={() => this.generateNew()}>Generate</CustomButton>
+          <CustomButton onClick={() => {
+            addMonster(monster);
+            history.push('/');
+          }}>Add</CustomButton>
+        </div>
 
       </div>
     )
   }
 }
+const mapDispatchToProps = dispatch => ({
+  addMonster: monster => dispatch(addUser(monster))
+});
 
-export default Details
+export default connect(null, mapDispatchToProps)(AddMonster);

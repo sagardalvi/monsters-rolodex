@@ -3,7 +3,7 @@ import {CardList} from "../card-list/card-list.component";
 import {SearchBox} from "../search-box/search-box.component";
 import './homepage.style.css';
 import {connect} from 'react-redux';
-import {addUsersList} from '../../redux/user/user.action';
+import CustomButton from '../custom-button/custom-button.component';
 
 class Homepage extends Component {
 
@@ -16,12 +16,6 @@ class Homepage extends Component {
     }
   }
 
-  componentDidMount() {
-    const {addMonsters} = this.props;
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then(response => response.json())
-      .then(users => addMonsters(users))
-  }
 
   handleChange = event => {
     this.setState({searchField: event.target.value});
@@ -29,13 +23,15 @@ class Homepage extends Component {
 
   render() {
     const {searchField, title} = this.state; //Destructuring
-    const {monsters} = this.props
+    const {monsters, history} = this.props
     const filteredMonsters = monsters.filter(monster => monster.name.toLowerCase().includes(searchField.toLowerCase()));
     return (
       <div >
         <h1>{title}</h1>
-        <SearchBox placeholder={'Search Monsters'}
-                   handleChange={this.handleChange}/>
+        <div className='controls'>
+          <SearchBox placeholder={'Search Monsters'} handleChange={this.handleChange}/>
+          <CustomButton onClick={()=>history.push('/add')}>Add New</CustomButton>
+        </div>
         <p className={'search-tag'}>Filter by Name: <i>{searchField}</i></p>
         <CardList monsters={filteredMonsters}/>
       </div>
@@ -47,8 +43,6 @@ const mapStateToProps = ({user}) => ({
   monsters: user.monsters
 });
 
-const mapDispatchToProps = dispatch => ({
-  addMonsters: monsters => dispatch(addUsersList(monsters))
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Homepage);
+
+export default connect(mapStateToProps)(Homepage);

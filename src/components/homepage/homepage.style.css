@@ -1,3 +1,6 @@
 p.search-tag {
     color: yellowgreen;
 }
+.controls button {
+    display: inline;
+}
