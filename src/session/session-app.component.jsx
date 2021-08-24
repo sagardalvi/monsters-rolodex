@@ -30,8 +30,8 @@ class SessionApp extends React.Component {
         <button
           onClick={() =>
             this.setState(state => ({
-              count : state.count + 1
-              // count: state.count == 5 ? state.count : state.count + 1 // shouldComponentUpdate method will return false after 5
+              // count : state.count + 1
+              count: state.count == 5 ? state.count : state.count + 1 // shouldComponentUpdate method will return false after 5
             }))
           }
         >
