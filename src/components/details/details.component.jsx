@@ -1,41 +1,22 @@
 import React from 'react';
 import './details.style.css';
 import CustomButton from '../custom-button/custom-button.component';
+import {connect} from 'react-redux';
+import {getUser} from '../../redux/user/user.action';
 
 class Details extends React.Component {
   constructor(props) {
     super(props);
     this.monsterId = props.match.params.monsterId
-    this.state = {
-      monster: {
-        id: this.monsterId,
-        name: null,
-        email: null,
-        address: {
-          street: null,
-          suite: null,
-          city: null,
-          zipcode: null
-        },
-        phone: "1-770-736-8031 x56442",
-        website: "hildegard.org",
-        company: {
-          name: "Romaguera-Crona",
-          bs: "harness real-time e-markets"
-        }
-      }
-    }
   }
 
   componentDidMount() {
-    fetch(`https://jsonplaceholder.typicode.com/users/${this.monsterId}`)
-      .then(response => response.json())
-      .then(user => this.setState({monster: user}))
+    const {getUser, match} = this.props;
+    getUser(+match.params.monsterId);
   }
 
   render() {
-    const {monster} = this.state;
-    const {history} = this.props;
+    const {history, monster} = this.props;
     return (
       <div className='details-page'>
         <h1>Monster</h1>
@@ -74,11 +55,20 @@ class Details extends React.Component {
           </div>
         </div>
 
-        <CustomButton onClick={()=>history.push('/')}>Back</CustomButton>
+        <CustomButton onClick={() => history.push('/')}>Back</CustomButton>
 
       </div>
     )
   }
 }
 
-export default Details
+const mapStateToProps = ({user}) => ({
+  monster: user.monster
+})
+
+const mapDispatchToProps = dispatch => ({
+  getUser: userId => dispatch(getUser(userId))
+
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Details)
